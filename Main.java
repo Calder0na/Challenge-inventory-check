@@ -1,3 +1,7 @@
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class Main {
     public static void main(String[] args) {
         // Tu código comienza aquí
@@ -71,8 +75,6 @@ class Producto {
     }
 }
 
-import java.util.ArrayList;
-import java.util.List;
 
 class Almacen {
     private String nombre;
@@ -96,5 +98,37 @@ class Almacen {
         // 4. Si el stock es diferente, imprimir un mensaje indicando la diferencia
         // 5. Si el producto no existe en el otro almacén, imprimir un mensaje indicando que no se encuentra
         // 6. Repetir el proceso para los productos que están en el otro almacén pero no en el primero
+        
+        for (Producto aux: this.productos) {
+        	boolean buscado = false;
+        	
+        	for(Producto otroProducto: otroAlmacen.productos) {
+        		if(aux.equals(otroProducto)) {
+        			buscado = true;
+        			
+        			if(aux.getStock() != otroProducto.getStock()) {
+        				System.out.println("Diferencia para el stock del producto " + aux.getNombre() + " :");
+        				System.out.println(this.nombre + ": " + aux.getStock() + " unidades");
+        				System.out.println(otroAlmacen.nombre + ": " + otroProducto.getStock());
+        			}
+        			break;
+        		}
+        	}
+        	if(!buscado) {
+        		System.out.println("El producto " +aux.getNombre() + " no se encuntra en  " + otroAlmacen.nombre);
+        	}
+        }
+        for(Producto otroProducto: otroAlmacen.productos) {
+        	boolean encontrado= false;
+        	for(Producto aux: this.productos) {
+        		if(otroProducto.equals(aux)) {
+        			encontrado = true;
+        			break;
+        		}
+        	}
+        	if(!encontrado) {
+        		System.out.println("El producto " + otroProducto.getNombre() + " no se encuentra en " +this.nombre);
+        	}
+        }
     }
 }
